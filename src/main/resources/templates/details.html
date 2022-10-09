@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</head>
+
+
+
+<body>
+<div class="row"></div>
+<div th:insert="~{addictions/navabar.html}">
+</div>
+<div style="margin-top: 10px" class="container-fluid">
+    <div id="div" class="row-12">
+        <div style="margin-top: 10px;padding: 15px;border:1px solid gray;" class="col-10 mx-auto border border-gray rounded">
+            <hr style="width: 100%;">
+            <div class="row mt-3" >
+                <div class="col-1">
+                    <h4 th:text="${folder.name}"></h4>
+                </div>
+                <div class="col-11 mt-1">
+                    <span  style="display:inline" th:each="c : ${folder.getCategories()}">
+                        <form action="@{'/deletecategory'}" method="post">
+                            <input type="hidden" name="id" th:value="${folder.getId()}">
+                            <input type="hidden" name="folder_id" th:value="${c.getId()}">
+                        <button class="btn btn-primary btn-sm" th:text="${c.getName()}"></button>
+                        </form>
+                    </span>
+                    <form th:action="@{'/assigncategory'}" method = "post">
+                        <select th:each="c : ${categories}">
+                            <input type="hidden" name="folder_id" th:value="${folder.getId()}">
+                            <input type="hidden" name="cat_id" th:value="${c.getId()}">
+                            <option th:text="${c.getName()}"></option>
+                        </select>
+                        <button>Add</button>
+<!--                        <div th:each="c : ${}">-->
+
+<!--                            <form th:action="@{'/assignsubject'}" method="post">-->
+<!--                                <input type="hidden" name="student_id" th:value="${student.id}">-->
+<!--                                <input type="hidden" name="subject_id" th:value="${sub.id}">-->
+<!--                                <button>+</button>-->
+<!--                                <span th:text="${sub.name+' '+sub.code+' '+sub.credits+' '+'creidts'}"></span>-->
+<!--                            </form>-->
+<!--                        </div>-->
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

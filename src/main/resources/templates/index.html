@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{addictions/head.html}">
+</head>
+
+
+<body>
+    <div th:insert="~{addictions/navabar.html}" class="row-12">
+    </div>
+    <div style="margin-top: 10px" class="container-fluid">
+        <div id="div" class="row-12">
+            <div style="margin-top: 10px;padding: 15px;border:1px solid gray" class="col-10 mx-auto border border-gray rounded" th:each="f : ${folders}">
+                <hr style="width: 100%;">
+                <h4 th:text="${f.name}"></h4>
+                <button type="button" class="btn btn-primary btn-sm"><a style="color:white;text-decoration: none;" th:href="@{'/details/'+${f.getId()}}">DETAILS</a></button>
+            </div>
+        </div>
+    </div>
+  <br>
+   <br>
+    <form th:action="@{'/addfolder'}" method="post">
+        <input type="text" name = "folder_name">
+        <button>ADD Folder</button>
+    </form>
+</body>
+
+</html>
